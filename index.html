@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<head>
+	<script src="jquery-latest.min.js"></script>
+  <script src="wialon.js"></script>
+  <script src="wialon2.js"></script>
+  
+
+
+<html>
+
+<body>
+
+	<table>
+		<tr><td>Select resource and template:</td><td><select id="res"></select><select id="templ"></select></td></tr>
+		<tr><td>Select unit:</td><td><select id="units"></select></td></tr>
+		<tr>
+			<td>Select time interval:</td>
+			<td><select id="interval">
+	            <option value="3600" title="60 sec * 60 min = 3600 sec = 1 hour">Last hour</option>
+				<option value="86400" title="60 sec * 60 minutes * 24 hours = 86400 sec = 1 day">Last day</option>
+				<option value="604800" title="86400 sec * 7 days = 604800 sec = 1 week">Last week</option>
+				<option value="2592000" title="86400 sec * 30 days = 2592000 sec = 1 month">Last month</option>
+
+			</select></td>
+		</tr>
+		<tr><td colspan="2" style="text-align:center;"><input type="button" value="Execute report" id="exec_btn"/></td></tr>
+	</table>
+	<div id="log"></div>
+
+	</body>
+	</html>

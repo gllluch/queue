@@ -1,6 +1,6 @@
 // Print message to log
 function msg(text) { $("#log").prepend(text + "<br/>"); }
-setInterval(executeReport, 30000); //выполнять каждые 30 сек
+setInterval(executeReport, refreshRate); //выполнять каждые N сек
 //startCountdown(1)
 function init() {// Execute after login succeed
     //setInterval(startCountdown(1),60500);

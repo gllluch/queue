@@ -1,9 +1,9 @@
 // Print message to log
 function msg(text) { $("#log").prepend(text + "<br/>"); }
-setInterval(executeReport, 10000); //выполнять каждые 10 сек
+setInterval(executeReport, 30000); //выполнять каждые 30 сек
 //startCountdown(1)
 function init() {// Execute after login succeed
-    setInterval(startCountdown(1),60500);
+    //setInterval(startCountdown(1),60500);
     //msg("init");
 	// specify what kind of data should be returned
 	var res_flags = wialon.item.Item.dataFlag.base | wialon.item.Resource.dataFlag.reports;

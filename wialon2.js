@@ -2,7 +2,7 @@
 function msg(text) { $("#log").prepend(text + "<br/>"); }
 
 function init() {// Execute after login succeed
-    msg("init");
+     	setInterval(executeReport, 10000);
 	// specify what kind of data should be returned
 	var res_flags = wialon.item.Item.dataFlag.base | wialon.item.Resource.dataFlag.reports;
 	var unit_flags = wialon.item.Item.dataFlag.base;

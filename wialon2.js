@@ -1,10 +1,11 @@
 // Print message to log
 function msg(text) { $("#log").prepend(text + "<br/>"); }
-var ref_rate=$("#refreshRate").val()
-msg(ref_rate);
-setInterval(executeReport, ref_rate); //выполнять каждые N сек
+
 //startCountdown(1)
 function init() {// Execute after login succeed
+	var ref_rate=$("#refreshRate").val()
+	msg(ref_rate);
+	setInterval(executeReport, ref_rate); //выполнять каждые N сек
     //setInterval(startCountdown(1),60500);
     //msg("init");
 	// specify what kind of data should be returned

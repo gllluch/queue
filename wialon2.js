@@ -1,8 +1,10 @@
 // Print message to log
 function msg(text) { $("#log").prepend(text + "<br/>"); }
-setInterval(executeReport, 10000);
+setInterval(executeReport, 10000); //выполнять каждые 10 сек
+//startCountdown(1)
 function init() {// Execute after login succeed
-     	//setInterval(executeReport, 10000);
+    setInterval(startCountdown(1),60500);
+    //msg("init");
 	// specify what kind of data should be returned
 	var res_flags = wialon.item.Item.dataFlag.base | wialon.item.Resource.dataFlag.reports;
 	var unit_flags = wialon.item.Item.dataFlag.base;
@@ -20,7 +22,7 @@ function init() {// Execute after login succeed
 				$("#res").append("<option value='" + res[i].getId() + "'>" + res[i].getName() + "</option>");
 
 			getTemplates(); // update report template list
-
+			
 			$("#res").change( getTemplates ); // bind action to select change
 
 			var units = sess.getItems("avl_unit_group"); // get loaded 'avl_units's items
@@ -74,41 +76,42 @@ function executeReport(){ // execute selected report
 	});
 }
 
-function showReportResult(result){ // show result after report execute
+function showReportResult(result) {
     document.getElementById('log').replaceChildren();
-	var tables = result.getTables(); // get report tables
-	if (!tables) return; // exit if no tables
-	for(var i=0; i < tables.length; i++){ // cycle on tables
-		// html contains information about one table
-		var html = "<b>"+ tables[i].label +"</b><div class='wrap'><table style='width:100%'>";
+    var tables = result.getTables(); // получаем таблицы отчета
+    if (!tables) return; // выходим, если нет таблиц
+    for (var i = 0; i < tables.length; i++) { // перебираем таблицы
+        // html содержит информацию о текущей таблице
+        var html = "<b>" + tables[i].label + "</b><div class='wrap'><table style='width:100%'>";
 
-		var headers = tables[i].header; // get table headers
-		html += "<tr>"; // open header row
-		for (var j=0; j<headers.length; j++) // add header
-			html += "<th>" + headers[j] + "</th>";
-		html += "</tr>"; // close header row
-		result.getTableRows(i, 0, tables[i].rows, // get Table rows
-			qx.lang.Function.bind( function(html, code, rows) { // getTableRows callback
-				if (code) {msg(wialon.core.Errors.getErrorText(code)); return;} // exit if error code
-				for(var j in rows) { // cycle on table rows
-					if (typeof rows[j].c == "undefined") continue; // skip empty rows
-					html += "<tr"+(j%2==1?" class='odd' ":"")+">"; // open table row
-					for (var k = 0; k < rows[j].c.length; k++) // add ceils to table
-						html += "<td>" + getTableValue(rows[j].c[k]) + "</td>";
-					html += "</tr>";// close table row
-				}
-				html += "</table>";
-				msg(html +"</div>");
-			}, this, html)
-		);
-	}
+        var headers = tables[i].header; // получаем заголовки таблицы
+        html += "<tr>"; // открываем строку заголовка
+        for (var j = 0; j < headers.length; j++) // добавляем заголовки
+            html += "<th>" + headers[j] + "</th>";
+        html += "</tr>"; // закрываем строку заголовка
+        result.getTableRows(i, 0, tables[i].rows, // получаем строки таблицы
+            qx.lang.Function.bind(function (html, code, rows) { // обратный вызов getTableRows
+                if (code) { msg(wialon.core.Errors.getErrorText(code)); return; } // выходим при ошибке
+                for (var j in rows) { // перебираем строки таблицы
+                    if (typeof rows[j].c == "undefined") continue; // пропускаем пустые строки
+                    html += "<tr" + (j % 2 == 1 ? " class='odd' " : "") + ">"; // открываем строку таблицы
+                    for (var k = 0; k < rows[j].c.length; k++) // добавляем ячейки в таблицу
+                        html += "<td>" + getTableValue(rows[j].c[k]) + "</td>";
+                    html += "</tr>"; // закрываем строку таблицы
+                }
+                html += "</table>";
+                msg(html + "</div>");
+            }, this, html)
+        );
+    }
 }
 
-function getTableValue(data) { // calculate ceil value
-	if (typeof data == "object")
-		if (typeof data.t == "string") return data.t; else return "";
-	else return data;
+function getTableValue(data) { // вычисляем значение ячейки
+    if (typeof data == "object")
+        if (typeof data.t == "string") return data.t; else return "";
+    else return data;
 }
+
 
 // execute when DOM ready
 $(document).ready(function () {
@@ -122,8 +125,31 @@ $(document).ready(function () {
 			// if error code - print error message
 			if (code){ msg(wialon.core.Errors.getErrorText(code)); return; }
 			msg("Logged successfully");
-
+        	 					              
         	init(); // when login suceed then run init() function
 	});
-
+    
 });
+
+function startCountdown(minutes) { //функция отсчета с обновлением времени
+  document.getElementById('countdown').replaceChildren();
+  let seconds = minutes * 60;
+  const countdownElement = document.getElementById("countdown");
+
+  function updateCountdown() {
+    const minutesLeft = Math.floor(seconds / 60);
+    const secondsLeft = seconds % 60;
+    countdownElement.textContent = `${minutesLeft} мин ${secondsLeft} сек`;
+
+    if (seconds <= 0) {
+      clearInterval(countdownInterval);
+      //countdownElement.textContent = "Время вышло!";
+      executeReport(); // Выполняем вашу функцию
+    }
+
+    seconds--;
+  }
+
+  updateCountdown(); // Сразу обновляем отсчет
+  const countdownInterval = setInterval(updateCountdown, 1000); // Обновляем каждую секунду
+}

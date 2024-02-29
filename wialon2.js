@@ -1,8 +1,8 @@
 // Print message to log
 function msg(text) { $("#log").prepend(text + "<br/>"); }
-
+setInterval(executeReport, 10000);
 function init() {// Execute after login succeed
-     	setInterval(executeReport, 10000);
+     	//setInterval(executeReport, 10000);
 	// specify what kind of data should be returned
 	var res_flags = wialon.item.Item.dataFlag.base | wialon.item.Resource.dataFlag.reports;
 	var unit_flags = wialon.item.Item.dataFlag.base;

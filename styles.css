@@ -1,7 +1,10 @@
 td, th{ border: 1px solid #c6c6c6; }
-//.wrap{ max-height:150px; overflow-y: auto; }
+.wrap{ max-height:550px; overflow-y: auto; }
 .odd, th{ background:#EEE; border: 1px solid #c6c6c6; }
 #fname {
   width: 500px;
   height: 50px;
+}
+#res_tr, #templ, #units_tr {
+  display: none;
 }

@@ -13,8 +13,8 @@
 <body>
 
 	<table>
-	<tr><td>Select resource and template:</td><td><select id="res"></select><select id="templ"></select></td></tr>
-	<tr><td>Select unit:</td><td><select id="units"></select></td></tr>
+	<tr id="res_tr"><td>Select resource and template:</td><td><select id="res"></select><select id="templ"></select></td></tr>
+	<tr id="units_tr"><td>Select unit:</td><td><select id="units"></select></td></tr>
 	<tr>
 		<td>Select time interval:</td>
 		<td><select id="interval">
@@ -31,7 +31,7 @@
 		
 	</select></td>
 	</tr>
-	<tr><td colspan="2" style="text-align:center;"><input type="button" value="Execute report" id="exec_btn"/></td></tr>
+	<tr><td colspan="2" style="text-align:center;"><input type="button" value="refresh" id="exec_btn"/></td></tr>
 </table>
 <div id="countdown"></div>
 	<div id="notes">

@@ -120,7 +120,7 @@ function getTableValue(data) { // вычисляем значение ячейк
 $(document).ready(function () {
 	$("#exec_btn").click( executeReport ); // bind action to button click
 
-	wialon.core.Session.getInstance().initSession("https://hst-api.wialon.com"); // init session
+	wialon.core.Session.getInstance().initSession("https://hst-api.wialon.host"); // init session
     // For more info about how to generate token check
     // http://sdk.wialon.com/playground/demo/app_auth_token
 	wialon.core.Session.getInstance().loginToken("404aa26a1c4ef8061f2d62534b7d6d0d6B4AABB0784047BFFF3C298323AE59B9024F68B1", "", // try to login

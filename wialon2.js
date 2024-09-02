@@ -123,7 +123,7 @@ $(document).ready(function () {
 	wialon.core.Session.getInstance().initSession("https://hst-api.wialon.host"); // init session
     // For more info about how to generate token check
     // http://sdk.wialon.com/playground/demo/app_auth_token
-	wialon.core.Session.getInstance().loginToken("404aa26a1c4ef8061f2d62534b7d6d0d6B4AABB0784047BFFF3C298323AE59B9024F68B1", "", // try to login
+	wialon.core.Session.getInstance().loginToken("404aa26a1c4ef8061f2d62534b7d6d0d8A2390781D037534EA26A97E81B7DB30FFD6A639", "", // try to login
 		function (code) { // login callback
 			// if error code - print error message
 			if (code){ msg(wialon.core.Errors.getErrorText(code)); return; }
